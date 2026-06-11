@@ -1,0 +1,216 @@
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SWU 品牌主题 */
+@import "./swu-brand.css";
+
+/* =============================================================================
+ * 全局字体 · Inter + PingFang（借鉴 art-design-pro）
+ * ============================================================================= */
+
+/* Inter 拉丁 + PingFang 中日韩 = 现代管理员后台字体栈 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--swu-bg);
+  color: var(--swu-text);
+}
+
+/* 中文标题字体 */
+h1, h2, h3, h4, h5, h6,
+.page-head .title,
+.brand-zh {
+  font-family:
+    "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+/* =============================================================================
+ * 滚动条
+ * ============================================================================= */
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.22); }
+::-webkit-scrollbar-track { background: transparent; }
+
+html.dark ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); }
+html.dark ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.18); }
+
+/* =============================================================================
+ * NProgress（西大蓝渐变）
+ * ============================================================================= */
+
+#nprogress .bar {
+  background: linear-gradient(90deg, var(--swu-blue) 0%, var(--swu-blue-light) 100%) !important;
+  height: 3px !important;
+}
+#nprogress .peg {
+  box-shadow: 0 0 12px var(--swu-blue), 0 0 6px var(--swu-blue) !important;
+}
+#nprogress .spinner-icon { display: none !important; }
+
+/* =============================================================================
+ * 应用级组件类（借鉴 art-design-pro .art-card / .art-card-header）
+ * ============================================================================= */
+
+@layer components {
+  /* 基础卡片（阴影模式，hover 上浮） */
+  .swu-card {
+    background: var(--swu-bg-elev);
+    border: 1px solid var(--swu-border);
+    border-radius: var(--swu-radius-lg);
+    box-shadow: var(--swu-shadow-sm);
+    padding: 20px;
+    transition: transform var(--swu-transition), box-shadow var(--swu-transition);
+  }
+  .swu-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--swu-shadow);
+  }
+
+  /* 卡片标题行 */
+  .swu-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .swu-card-header .title h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--swu-text);
+  }
+  .swu-card-header .title p {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--swu-text-3);
+  }
+
+  /* 统计卡（巨型数字 + 趋势箭头） */
+  .swu-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 20px;
+    background: var(--swu-bg-elev);
+    border: 1px solid var(--swu-border);
+    border-radius: var(--swu-radius);
+    transition: transform var(--swu-transition), box-shadow var(--swu-transition);
+  }
+  .swu-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--swu-shadow);
+  }
+  .swu-stat .stat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--swu-radius-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+  }
+  .swu-stat .stat-icon.blue   { background: linear-gradient(135deg, #003D7A, #1565C0); }
+  .swu-stat .stat-icon.green  { background: linear-gradient(135deg, #389E0D, #52C41A); }
+  .swu-stat .stat-icon.gold   { background: linear-gradient(135deg, #B8860B, #D4AF37); }
+  .swu-stat .stat-icon.red    { background: linear-gradient(135deg, #8B0000, #B22222); }
+  .swu-stat .stat-icon.cyan   { background: linear-gradient(135deg, #00838F, #00ACC1); }
+
+  .swu-stat .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--swu-text);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
+  .swu-stat .stat-label {
+    font-size: 13px;
+    color: var(--swu-text-3);
+    font-weight: 500;
+  }
+  .swu-stat .stat-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .swu-stat .stat-trend.up   { color: var(--swu-success); }
+  .swu-stat .stat-trend.down { color: var(--swu-danger); }
+
+  /* 页面头部 */
+  .swu-page-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .swu-page-head .head-left h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--swu-text);
+    letter-spacing: -0.02em;
+  }
+  .swu-page-head .head-left p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--swu-text-3);
+  }
+}
+
+/* =============================================================================
+ * EP 按钮全局风格：趋向 plain/text，减弱默认厚重感（借鉴 art-design-pro）
+ * ============================================================================= */
+
+.el-button--primary {
+  box-shadow: 0 2px 6px rgba(0, 61, 122, 0.18);
+}
+.el-button--primary:hover {
+  box-shadow: 0 4px 12px rgba(0, 61, 122, 0.24);
+}
+
+/* 表格内操作列用 link 类型，更轻盈 */
+.el-table .el-button.is-link {
+  font-weight: 500;
+}
+
+/* =============================================================================
+ * 通用工具类
+ * ============================================================================= */
+
+.swu-gradient-primary {
+  background: linear-gradient(135deg, #003D7A 0%, #1565C0 50%, #2196F3 100%);
+}
+
+.swu-motto {
+  font-family: "Source Han Serif", "STZhongsong", "SimSun", serif;
+  letter-spacing: 0.18em;
+}
+
+/* 等宽数字（表格内数值） */
+.mono { font-family: "Inter", ui-monospace, SFMono-Regular, Menlo, monospace; }

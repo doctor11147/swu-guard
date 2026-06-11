@@ -1,0 +1,61 @@
+# Face access control system configuration.
+# All paths are resolved relative to the app/ directory unless absolute.
+
+paths:
+  # Upstream repositories used as libraries (relative to app/ -> project root).
+  edgeface_repo: ../edgeface
+  silent_fas_repo: ../Silent-Face-Anti-Spoofing
+  # Runtime data directory (FAISS index, SQLite DB, registered face crops).
+  data_dir: ./data
+  # InsightFace model cache. SCRFD weights from buffalo_l live here.
+  insightface_root: ./models/insightface
+
+detector:
+  backend: scrfd
+  # InsightFace model bundle name. buffalo_sc (~16MB) loads only SCRFD-500MF + a tiny
+  # recognition model; we only consume detection. buffalo_l (~300MB) is more accurate.
+  bundle: buffalo_sc
+  det_size: [640, 640]
+  det_thresh: 0.5
+  # ctx_id: -1 = CPU, >=0 = CUDA device index.
+  ctx_id: -1
+
+aligner:
+  # ArcFace-standard 112x112 template. Do not change unless the embedder is retrained.
+  output_size: 112
+
+anti_spoof:
+  backend: minifas
+  # Two MiniFASNet checkpoints come pre-shipped. The filename encodes
+  # (h_input, w_input, model_type, scale); scale=None means full-image (no crop).
+  model_dir: ../Silent-Face-Anti-Spoofing/resources/anti_spoof_models
+  # Class index 1 = real face. Threshold on combined-softmax-mean score.
+  real_threshold: 0.85
+  # Disable this gate entirely (e.g. for offline benchmarks). Default: enabled.
+  enabled: true
+
+embedder:
+  backend: edgeface
+  # Pick any of the 6 local checkpoints under edgeface/checkpoints/.
+  # edgeface_s_gamma_05 is the recommended balanced default (3.65M params, 99.78% LFW).
+  model_name: edgeface_s_gamma_05
+  checkpoint: ../edgeface/checkpoints/edgeface_s_gamma_05.pt
+  device: auto  # auto | cpu | cuda | mps
+  # 1:N decision threshold on cosine similarity (range -1..1).
+  # Calibrated on LFW 6000-pair protocol with this exact pipeline:
+  #   10-fold mean acc=0.9977, mean best thr=0.345 (matches EdgeFace paper 99.78%).
+  # For 1:N open-set on a different domain (校园门禁), bias slightly higher than the
+  # 1:1 verification optimum to trade recall for precision.
+  match_threshold: 0.40
+
+quality:
+  backend: laplacian
+
+api:
+  host: 0.0.0.0
+  port: 8000
+  cors_origins: ["*"]
+
+frontend:
+  # Where the SPA static assets live (served by FastAPI).
+  dist_dir: ./frontend

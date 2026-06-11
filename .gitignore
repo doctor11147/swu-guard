@@ -1,0 +1,55 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+*.log
+
+# Runtime data, biometric data, databases and vector indexes
+app/data/*
+!app/data/.gitkeep
+app/models/*
+!app/models/.gitkeep
+*.db
+*.sqlite*
+*.faiss
+*.npy
+*.npz
+
+# Models, datasets and generated artifacts
+*.pt
+*.pth
+*.onnx
+*.caffemodel
+*.bin
+datasets/
+checkpoints/
+results/
+outputs/
+
+# Third-party source trees are fetched separately
+edgeface/
+Silent-Face-Anti-Spoofing/
+insightface/
+CR-FIQA/
+faiss/
+
+# OS and IDE
+.DS_Store
+.idea/
+.vscode/

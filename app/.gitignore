@@ -1,0 +1,10 @@
+data/
+models/insightface/
+__pycache__/
+*.pyc
+.DS_Store
+*.faiss
+*.db
+*.db-journal
+.venv/
+.env

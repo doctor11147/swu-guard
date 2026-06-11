@@ -1,0 +1,121 @@
+/* =============================================================================
+ * 西南大学品牌色 + Art Design Pro 视觉增强
+ * 颜色取自 SWU VIS 手册（2024），令牌体系借鉴 art-design-pro
+ * ============================================================================= */
+
+:root {
+  /* === 西大蓝 (Primary) === */
+  --swu-blue:        #003D7A;
+  --swu-blue-dark:   #002855;
+  --swu-blue-light:  #1565C0;
+  --swu-blue-50:     #E3F2FD;
+  --swu-blue-100:    #BBDEFB;
+
+  /* === 西大红 (Secondary) === */
+  --swu-red:         #B22222;
+  --swu-red-dark:    #8B0000;
+  --swu-red-light:   #DC143C;
+  --swu-red-50:      #FFEBEE;
+
+  /* === 校徽金 (Accent) === */
+  --swu-gold:        #D4AF37;
+  --swu-gold-light:  #F5DEB3;
+
+  /* === 中性色 === */
+  --swu-text:        #1A1A1A;
+  --swu-text-2:      #595959;
+  --swu-text-3:      #8C8C8C;
+  --swu-bg:          #F5F7FA;
+  --swu-bg-elev:     #FFFFFF;
+  --swu-border:      #E5E7EB;
+  --swu-divider:     #EEF1F5;
+
+  /* === 状态色 === */
+  --swu-success:     #52C41A;
+  --swu-warning:     #FAAD14;
+  --swu-danger:      #F5222D;
+  --swu-info:        #1565C0;
+
+  /* === 玻璃拟态（借鉴 art-design-pro）=== */
+  --swu-glass-bg:      rgba(255, 255, 255, 0.72);
+  --swu-glass-bg-dark: rgba(17, 26, 46, 0.78);
+  --swu-glass-blur:    12px;
+  --swu-glass-border:  rgba(255, 255, 255, 0.18);
+
+  /* === 阴影层级（借鉴 art-design-pro shadow-mode）=== */
+  --swu-radius-sm:   6px;
+  --swu-radius:      10px;
+  --swu-radius-lg:   14px;
+  --swu-radius-xl:   18px;
+
+  --swu-shadow-none:  none;
+  --swu-shadow-xs:    0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --swu-shadow-sm:    0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+  --swu-shadow:       0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --swu-shadow-lg:    0 10px 20px -4px rgba(0, 61, 122, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+  --swu-shadow-xl:    0 20px 30px -6px rgba(0, 0, 0, 0.08);
+
+  /* === 过渡 === */
+  --swu-transition:   0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =============================================================================
+ * Element Plus 主题覆盖
+ * ============================================================================= */
+
+:root {
+  --el-color-primary:           var(--swu-blue);
+  --el-color-primary-light-3:   #2C5A9A;
+  --el-color-primary-light-5:   #6B8DBF;
+  --el-color-primary-light-7:   #B8C8DD;
+  --el-color-primary-light-8:   #D5DEEA;
+  --el-color-primary-light-9:   var(--swu-blue-50);
+  --el-color-primary-dark-2:    var(--swu-blue-dark);
+
+  --el-color-success:           var(--swu-success);
+  --el-color-warning:           var(--swu-warning);
+  --el-color-danger:            var(--swu-danger);
+  --el-color-info:              var(--swu-info);
+
+  --el-bg-color:                var(--swu-bg-elev);
+  --el-bg-color-page:           var(--swu-bg);
+  --el-text-color-primary:      var(--swu-text);
+  --el-text-color-regular:      var(--swu-text-2);
+  --el-text-color-secondary:    var(--swu-text-3);
+  --el-border-color-lighter:    var(--swu-divider);
+  --el-border-color-light:      var(--swu-border);
+  --el-border-radius-base:      var(--swu-radius);
+}
+
+/* =============================================================================
+ * 暗黑模式
+ * ============================================================================= */
+
+html.dark {
+  --swu-bg:          #0B1220;
+  --swu-bg-elev:     #111A2E;
+  --swu-text:        #E5EBF2;
+  --swu-text-2:      #A8B3C4;
+  --swu-text-3:      #6B7A92;
+  --swu-border:      #1F2B45;
+  --swu-divider:     #1A2440;
+
+  --swu-glass-bg:      var(--swu-glass-bg-dark);
+  --swu-glass-border:  rgba(255, 255, 255, 0.08);
+
+  --el-bg-color:               var(--swu-bg-elev);
+  --el-bg-color-page:          var(--swu-bg);
+  --el-text-color-primary:     var(--swu-text);
+  --el-text-color-regular:     var(--swu-text-2);
+  --el-text-color-secondary:   var(--swu-text-3);
+  --el-border-color-lighter:   var(--swu-divider);
+  --el-border-color-light:     var(--swu-border);
+}
+
+/* === 全局过渡 === */
+html, body, .el-card, .el-menu, .el-aside, .el-header, .el-main {
+  transition:
+    background-color 0.2s ease,
+    color 0.15s ease,
+    border-color 0.2s ease;
+}
